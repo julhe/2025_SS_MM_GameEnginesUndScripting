@@ -5,10 +5,29 @@ public class TorTrigger : MonoBehaviour
     public GameObject tor;
     public Light alarmLicht;
     public Light alarmLicht2;
-    private void OnTriggerEnter(Collider other)
+
+    // Speichert ob man schon mit diesem Trigger interagiert hat.
+    bool hasInteracted = false;
+    public void OnInteraction()
     {
+        hasInteracted = true;
         tor.SetActive(false);
         alarmLicht.color = Color.green;
         alarmLicht2.color = Color.yellow;
+    }
+
+    public void OnIsInteractable()
+    {
+        // Man soll nur die Interaktionsmöglichkeit angezeigt bekommen, wenn man noch nicht mit dem Objekt interagiert hat.
+        if(hasInteracted)
+        {
+            // Wir HABEN schon interagiert, keine weitere Interaktion soll passieren.
+            InteractionSensor.NextObjectCanInteract = false;
+
+        } else
+        {
+            // Wir haben NOCH NICHT interagiert, weitere Interaktion soll möglich sein.
+            InteractionSensor.NextObjectCanInteract = true;
+        }
     }
 }
