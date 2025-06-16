@@ -6,14 +6,23 @@ public class TorTrigger : MonoBehaviour
     public Light alarmLicht;
     public Light alarmLicht2;
 
+
+
     // Speichert ob man schon mit diesem Trigger interagiert hat.
     bool hasInteracted = false;
+
+  
+    public GameObject player; // Hier kommt der spieler rein
     public void OnInteraction()
     {
-        hasInteracted = true;
+        hasInteracted = true;   
         tor.SetActive(false);
         alarmLicht.color = Color.green;
         alarmLicht2.color = Color.yellow;
+
+
+        // Erhöht die größe des player transformes um 100%
+        player.transform.localScale += Vector3.one;
     }
 
     public void OnIsInteractable()
